@@ -93,14 +93,18 @@
               <img class="img-responsive" ng-src="{{ctrl.data.images.logo}}" alt="{{ctrl.data.images.logo}}">
 
               <form role="form" ng-submit="ctrl.calculate()" class="form-horizontal">
+                  <div class="col-sm-12 form-group" ng-if="field != 'images'" ng-repeat="(field, value) in ctrl.data">
+                      <strong class="control-label col-sm-6">Canal</strong>
+                      <input  type="text" class="form-control left" ng-model="ctrl.channelName">
+                  </div>
+                  <hr>
                   <h1>{{ctrl.data.channelName}}</h1>
                   <div class="col-sm-12 form-group" ng-if="field != 'images'" ng-repeat="(field, value) in ctrl.data">
                       <strong class="control-label col-sm-6">{{field}}</strong>
                       <div class="col-sm-6">
-                          <input type="text" class="form-control left" ng-model="value"></input>
+                          <input type="text" class="form-control left" readonly ng-model="value"></input>
                       </div>
                   </div>
-                  <input placeholder="Channel Name" type="text" ng-model="ctrl.channelName">Canal</input>
               </form>
           </div>
       </div>
