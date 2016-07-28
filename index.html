@@ -90,7 +90,7 @@
     <section id="application">
       <div class="container">
           <div ng-app="counter" ng-controller="controller as ctrl">
-              <img class="img-responsive" ng-src="{{self.data.images.logo}}" alt="{{self.data.images.logo}}">
+              <img class="img-responsive" ng-src="{{ctrl.data.images.logo}}" alt="{{ctrl.data.images.logo}}">
 
               <form ng-submit="ctrl.calculate()" class="form-horizontal">
                   <h1>{{ctrl.data.channelName}}</h1>
