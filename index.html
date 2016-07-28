@@ -90,7 +90,7 @@
     <section id="application">
       <div class="container">
           <div ng-app="counter" ng-controller="controller as ctrl">
-              <h1>{{ctrl.channelName}}</h1>
+              <h1>{{ctrl.data.channelName}}</h1>
               <div class="col-sm-12" ng-repeat="field in ctrl.data">
                   <label class="col-sm-6 text-right">{{field}}</label>
                   <label class="col-sm-6 text-left">{{ctrl.data[field]}}</label>

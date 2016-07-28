@@ -4,7 +4,11 @@ app.controller('controller', function($http) {
     var self = this;
 
     self.data = {
-        "viewers": 0
+        "viewers": 0,
+        "channelName": "imaqtpie",
+        "game": "osu",
+        "preview": "none",
+        "logo": "logazo"
     }
 
     self.calculate = function() {
@@ -13,7 +17,7 @@ app.controller('controller', function($http) {
             method: 'GET',
             url: apiUrl
         }).then (function success(response) {
-            self.data.channel = self.channelName;
+            self.data.channelName = self.channelName;
             self.data.game = response.data.stream.game;
             self.data.viewers = response.data.stream.viewers;
             self.data.preview = response.data.stream.preview.large;
