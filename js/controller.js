@@ -14,7 +14,7 @@ app.controller('controller', function($http) {
             url: 'https://api.twitch.tv/kraken/streams/ealyn'
         }).then (function success(response) {
             console.log("Succ, wait for it...");
-            console.log(response.data);
+            console.log(response.data.stream.viewers);
             console.log("ess");
         })
         console.log(self.data.viewers);
