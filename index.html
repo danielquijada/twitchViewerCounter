@@ -90,13 +90,14 @@
     <section id="application">
       <div class="container">
           <div ng-app="counter" ng-controller="controller as ctrl">
-              <h1>{{ctrl.data.channelName}}</h1>
-              <div class="col-sm-12" ng-repeat="(field, value) in ctrl.data">
-                  <label class="col-sm-6 text-right">FIELD: {{field}}</label>
-                  <label class="col-sm-6 text-left">DATA: {{value}}</label>
-              </div>
-              <input class="col-sm-7" type="text" ng-model="ctrl.channelName">Canal</input>
-              <a class="btn fa fa-plus has-icon btn-danger" ng-click="ctrl.calculate()" role="button">Switzerland</a>
+              <form ng-submit="ctrl.calculate()" class="form-horizontal">
+                  <h1>{{ctrl.data.channelName}}</h1>
+                  <div class="col-sm-12" ng-repeat="(field, value) in ctrl.data">
+                      <label class="control-label col-sm-6">{{field}}</label>
+                      <label class="col-sm-6 text-left">{{value}}</label>
+                  </div>
+                  <input class="col-sm-7" type="text" ng-model="ctrl.channelName">Canal</input>
+              </form>
           </div>
       </div>
     </section>
