@@ -15,7 +15,7 @@ app.controller('controller', function($http) {
             self.data.game = response.data.stream.game;
             self.data.viewers = response.data.stream.viewers;
             self.data.preview = response.data.stream.preview.large;
-            self.data.logo = response.data.stream.logo;
+            self.data.logo = response.data.stream.channel.logo;
             console.log(self.data);
         })
     }
