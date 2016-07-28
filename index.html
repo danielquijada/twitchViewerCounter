@@ -71,10 +71,26 @@
         <!-- /.container-fluid -->
     </nav>
 
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <img class="img-responsive" src="img/profile.png" alt="">
+                    <div class="intro-text">
+                        <span class="name">LoL Seeder</span>
+                        <hr class="star-light">
+                        <span class="skills">T.T</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
     <section id="application">
       <div class="container">
           <div ng-app="counter" ng-controller="controller as ctrl">
-              <img class="img-responsive" src="self.data.images.logo" alt="">
+              <img class="img-responsive" ng-src="{{self.data.images.logo}}" alt="">
 
               <form ng-submit="ctrl.calculate()" class="form-horizontal">
                   <h1>{{ctrl.data.channelName}}</h1>
