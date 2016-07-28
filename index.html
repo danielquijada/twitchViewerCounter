@@ -71,32 +71,18 @@
         <!-- /.container-fluid -->
     </nav>
 
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <img class="img-responsive" src="img/profile.png" alt="">
-                    <div class="intro-text">
-                        <span class="name">LoL Seeder</span>
-                        <hr class="star-light">
-                        <span class="skills">DEM THOL.</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-
     <section id="application">
       <div class="container">
           <div ng-app="counter" ng-controller="controller as ctrl">
+              <img class="img-responsive" src="self.data.images.logo" alt="">
+
               <form ng-submit="ctrl.calculate()" class="form-horizontal">
                   <h1>{{ctrl.data.channelName}}</h1>
-                  <div class="col-sm-12" ng-repeat="(field, value) in ctrl.data">
-                      <label class="control-label col-sm-6">{{field}}</label>
-                      <label class="col-sm-6 text-left">{{value}}</label>
+                  <div class="col-sm-12" ng-if="field != 'images'" ng-repeat="(field, value) in ctrl.data">
+                      <strong class="control-label col-sm-6">{{field}}</strong>
+                      <label class="control-label col-sm-6 text-left">{{value}}</label>
                   </div>
-                  <input class="col-sm-7" type="text" ng-model="ctrl.channelName">Canal</input>
+                  <input placeholder="Channel Name" type="text" ng-model="ctrl.channelName">Canal</input>
               </form>
           </div>
       </div>
