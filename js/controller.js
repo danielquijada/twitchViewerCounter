@@ -8,10 +8,12 @@ app.controller('controller', function($http) {
     }
 
     self.calculate = function() {
+        var apiUrl = 'https://api.twitch.tv/kraken/streams/' + self.channelName;
         $http({
             method: 'GET',
-            url: 'https://api.twitch.tv/kraken/streams/ealyn'
+            url: apiUrl;
         }).then (function success(response) {
+            self.data.channel = self.channelName;
             self.data.game = response.data.stream.game;
             self.data.viewers = response.data.stream.viewers;
             self.data.preview = response.data.stream.preview.large;
