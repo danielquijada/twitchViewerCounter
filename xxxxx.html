@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+
+        <div ng-app="counter" ng-controller="controller as ctrl">
+            <input class="col-sm-7" type="text" ng-model="ctrl.data.viewers">
+            <a class="btn fa fa-plus has-icon btn-danger" ng-click="ctrl.calculate()" role="button">Switzerland</a>
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+        <script src="https://code.angularjs.org/1.4.8/angular-route.js"></script>          
+        <script src="js/jquery.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/controller.js"></script>
+    </body>
+</html>
