@@ -11,7 +11,7 @@ app.controller('controller', function($http) {
         var apiUrl = 'https://api.twitch.tv/kraken/streams/' + self.channelName;
         $http({
             method: 'GET',
-            url: apiUrl;
+            url: apiUrl
         }).then (function success(response) {
             self.data.channel = self.channelName;
             self.data.game = response.data.stream.game;
