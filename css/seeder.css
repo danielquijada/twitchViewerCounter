@@ -1,0 +1,15 @@
+.btn {
+  margin: 16px;
+}
+
+header, footer .footer-above, footer .footer-below, hr.star-light:after {
+    background-color: #000;
+}
+
+section.success {
+    background-color: #000;
+}
+
+.navbar-default {
+    background-color: #000;
+}
