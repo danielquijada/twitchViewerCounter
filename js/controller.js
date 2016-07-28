@@ -1,4 +1,4 @@
-var app = angular.module('seeder', []);
+var app = angular.module('counter', []);
 
 app.controller('controller', function() {
     var self = this;
