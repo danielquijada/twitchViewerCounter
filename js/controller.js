@@ -8,15 +8,15 @@ app.controller('controller', function($http) {
     }
 
     self.calculate = function() {
-        self.data.viewers += 1;
         $http({
             method: 'GET',
             url: 'https://api.twitch.tv/kraken/streams/ealyn'
         }).then (function success(response) {
-            console.log("Succ, wait for it...");
-            console.log(response.data.stream.viewers);
-            console.log("ess");
+            self.data.game = response.data.stream.game;
+            self.data.viewers = response.data.stream.viewers;
+            self.data.preview = response.data.stream.preview.large;
+            self.data.logo = response.data.stream.logo;
+            console.log(response.data);
         })
-        console.log(self.data.viewers);
     }
 });
