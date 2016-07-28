@@ -11,7 +11,7 @@ app.controller('controller', function($http) {
         self.data.viewers += 1;
         $http({
             method: 'GET',
-            url: 'https://api.twitch.tv/kraken/streams/ealyn';
+            url: 'https://api.twitch.tv/kraken/streams/ealyn'
         }).then (function success(response) {
             console.log("Succ, wait for it...");
             console.log(response);
