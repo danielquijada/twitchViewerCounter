@@ -92,11 +92,13 @@
           <div ng-app="counter" ng-controller="controller as ctrl">
               <img class="img-responsive" ng-src="{{ctrl.data.images.logo}}" alt="{{ctrl.data.images.logo}}">
 
-              <form ng-submit="ctrl.calculate()" class="form-horizontal">
+              <form role="form" ng-submit="ctrl.calculate()" class="form-horizontal">
                   <h1>{{ctrl.data.channelName}}</h1>
                   <div class="col-sm-12 form-group" ng-if="field != 'images'" ng-repeat="(field, value) in ctrl.data">
                       <strong class="control-label col-sm-6">{{field}}</strong>
-                      <input type="text" class="form-control col-sm-6 text-left" ng-model="value"></input>
+                      <div class="col-sm-6">
+                          <input type="text" class="form-control left" ng-model="value"></input>
+                      </div>
                   </div>
                   <input placeholder="Channel Name" type="text" ng-model="ctrl.channelName">Canal</input>
               </form>
