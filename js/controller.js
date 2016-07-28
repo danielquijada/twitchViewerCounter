@@ -3,6 +3,7 @@ var app = angular.module('counter', []);
 app.controller('controller', function($http) {
     var self = this;
 
+    self.loading = false;
     self.data = {
         "viewers": 0,
         "channelName": "you",
@@ -14,6 +15,7 @@ app.controller('controller', function($http) {
     }
 
     self.calculate = function() {
+        console.log("CALCULATE", self.loading);
         if (self.loading) {
             return;
         }
