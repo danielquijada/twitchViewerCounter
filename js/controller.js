@@ -31,7 +31,9 @@ app.controller('controller', function($http, $interval) {
 
     function startCalculate () {
         self.calculating = true;
-        self.timer = $interval (self.test(), 100);
+        self.timer = $interval (function() {
+                self.test()
+            }, 100);
     }
 
     function stopCalculate () {
