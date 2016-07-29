@@ -96,9 +96,7 @@ app.controller('controller', function($http, $interval) {
         			pointColor : "#fff",
         			pointStrokeColor : "#9DB86D",
         			data : values,
-                    lineTension: 0,
-                    xAxisID : "Hora",
-                    yAxisID : "Viewers"
+                    lineTension: 0
         		}
         	]
         };
