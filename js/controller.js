@@ -2,7 +2,7 @@ var app = angular.module('counter', []);
 
 app.controller('controller', function($http, $interval) {
     var self = this;
-    var TIMEOUT = 5000;
+    var TIMEOUT = 60000;
 
     self.channelName = 'Ealyn';
     self.lastCheckedName = 'Ealyn';
@@ -94,7 +94,8 @@ app.controller('controller', function($http, $interval) {
         			strokeColor : "#ACC26D",
         			pointColor : "#fff",
         			pointStrokeColor : "#9DB86D",
-        			data : values
+        			data : values,
+                    lineTension: 0,
         		}
         	]
         };
