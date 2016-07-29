@@ -31,12 +31,16 @@ app.controller('controller', function($http, $interval) {
 
     function startCalculate () {
         self.calculating = true;
-        self.timer = $interval (self.calculate(), TIMEOUT);
+        self.timer = $interval (self.test(), 100);
     }
 
     function stopCalculate () {
         self.calculating = false;
         $interval.cancel(self.timer);
+    }
+
+    self.test() {
+        console.log(self.calculating, "pepe dijo pepe a las " + new Date());
     }
 
     self.calculate = function() {
@@ -57,7 +61,7 @@ app.controller('controller', function($http, $interval) {
     }
 
     parseDate = function (date) {
-        return twoNumbers(date.getDate()) + "/" + parseMonth(date.getMonth()) + "/" + date.getFullYear() + " - " + twoNumbers(date.getHours()) + ":" + twoNumbers(date.getMinutes()) + ":" + twoNumbers(date.getSeconds());
+        return twoNumbers(date.getD ate()) + "/" + parseMonth(date.getMonth()) + "/" + date.getFullYear() + " - " + twoNumbers(date.getHours()) + ":" + twoNumbers(date.getMinutes()) + ":" + twoNumbers(date.getSeconds());
     }
 
     function twoNumbers (num) {
