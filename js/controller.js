@@ -80,7 +80,7 @@ app.controller('controller', function($http, $interval) {
 
         Object.keys(self.history).forEach (function(key) {
             if (key != 'minymax') {
-                labels.push(key);
+                labels.push(parseDate(new Date(+key)));
                 values.push(self.history[key]);
             }
         });
