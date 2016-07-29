@@ -6,7 +6,12 @@ app.controller('controller', function($http, $interval) {
 
     self.calculating = false;
     self.timer = null;
-    self.history = {};
+    self.history = {
+        'max': 0,
+        'maxTime': new Date(),
+        'min': 100000000,
+        'minDate': new Date();
+    };
     self.channelStatus = 'Ealyn';
 
     self.data = {
@@ -58,6 +63,16 @@ app.controller('controller', function($http, $interval) {
             self.data.images.preview = response.data.stream.preview.large;
             self.data.images.logo = response.data.stream.channel.logo;
 
+            if (self.data.viewers > self.history.max) {
+                self.history.max = self.data.viewers;
+                self.history.maxTime = self.data.date;
+            }
+
+            if (self.data.viewers < self.history.min) {
+                self.history.min = self.data.viewers;
+                self.history.minTime = self.data.date;
+            }
+            
             self.history[self.data.date.getTime()] = self.data.viewers;
         })
     }
