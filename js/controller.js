@@ -60,7 +60,7 @@ app.controller('controller', function($http, $interval) {
         })
     }
 
-    parseDate = function (date) {
+    function parseDate (date) {
         return twoNumbers(date.getDate()) + "/" + parseMonth(date.getMonth()) + "/" + date.getFullYear() + " - " + twoNumbers(date.getHours()) + ":" + twoNumbers(date.getMinutes()) + ":" + twoNumbers(date.getSeconds());
     }
 
