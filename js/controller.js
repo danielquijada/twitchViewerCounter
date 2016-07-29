@@ -8,7 +8,7 @@ app.controller('controller', function($http, $interval) {
     self.timer = null;
     self.history = {};
     self.channelStatus = 'Ealyn';
-    
+
     self.data = {
         "viewers": 0,
         "channelStatus": "you",
@@ -62,7 +62,7 @@ app.controller('controller', function($http, $interval) {
         })
     }
 
-    self.getName(field) {
+    self.getName = function(field) {
         var name = field;
         switch (field) {
             case 'viewers':
