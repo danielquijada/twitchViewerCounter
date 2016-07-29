@@ -48,8 +48,9 @@ app.controller('controller', function($http, $interval) {
             self.lastCheckedName = self.channelName;
         }
         self.calculating = true;
+        self.calculate();
         self.timer = $interval (function() {
-                self.calculate()
+                self.calculate();
             }, TIMEOUT);
     }
 
@@ -96,8 +97,8 @@ app.controller('controller', function($http, $interval) {
         			pointStrokeColor : "#9DB86D",
         			data : values,
                     lineTension: 0,
-                    xAxisID : 'Hora',
-                    yAxisID : 'Viewers'
+                    xAxisID : "Hora",
+                    yAxisID : "Viewers"
         		}
         	]
         };
