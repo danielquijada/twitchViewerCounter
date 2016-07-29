@@ -10,7 +10,7 @@ app.controller('controller', function($http, $interval) {
         'max': 0,
         'maxTime': new Date(),
         'min': 100000000,
-        'minDate': new Date();
+        'minDate': new Date()
     };
     self.channelStatus = 'Ealyn';
 
@@ -72,7 +72,7 @@ app.controller('controller', function($http, $interval) {
                 self.history.min = self.data.viewers;
                 self.history.minTime = self.data.date;
             }
-            
+
             self.history[self.data.date.getTime()] = self.data.viewers;
         })
     }
