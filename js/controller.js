@@ -57,7 +57,7 @@ app.controller('controller', function($http, $interval) {
             self.data.images.preview = response.data.stream.preview.large;
             self.data.images.logo = response.data.stream.channel.logo;
 
-            self.history[date.getTime()] = "viewers": self.data.viewers;
+            self.history[date.getTime()] = self.data.viewers;
         })
     }
 
