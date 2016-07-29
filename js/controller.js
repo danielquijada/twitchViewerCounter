@@ -4,24 +4,28 @@ app.controller('controller', function($http, $interval) {
     var self = this;
     var TIMEOUT = 5000;
 
-    self.calculating = false;
-    self.timer = null;
-    self.history = {
-        'max': 0,
-        'maxTime': new Date(),
-        'min': 100000000,
-        'minDate': new Date()
-    };
-    self.channelStatus = 'Ealyn';
+    self.initDefaults();
+    self.channelName = 'Ealyn';
+    self.lastCheckedName = 'Ealyn';
 
-    self.data = {
-        "viewers": 0,
-        "channelStatus": "you",
-        "game": "none",
-        "date": new Date(),
-        "images":{
-            "preview": "http://s.jtvnw.net/jtv_user_pictures/hosted_images/GlitchIcon_WhiteonPurple.png",
-            "logo": "http://s.jtvnw.net/jtv_user_pictures/hosted_images/GlitchIcon_WhiteonPurple.png"
+    self.initDefaults = function () {
+        self.calculating = false;
+        self.timer = null;
+        self.history = {
+            'max': 0,
+            'maxTime': new Date(),
+            'min': 100000000,
+            'minDate': new Date()
+        };
+        self.data = {
+            "viewers": 0,
+            "channelStatus": "Hello World!",
+            "game": "I don't play.",
+            "date": new Date(),
+            "images":{
+                "preview": "http://s.jtvnw.net/jtv_user_pictures/hosted_images/GlitchIcon_WhiteonPurple.png",
+                "logo": "http://s.jtvnw.net/jtv_user_pictures/hosted_images/GlitchIcon_WhiteonPurple.png"
+            }
         }
     }
     self.parsedDate = parseDate(self.data.date);
@@ -37,6 +41,10 @@ app.controller('controller', function($http, $interval) {
     }
 
     function startCalculate () {
+        if (self.channelName !== self.lastCheckedName) {
+            self.initDefaults();
+            self.lastCheckedName = self.channelName;
+        }
         self.calculating = true;
         self.timer = $interval (function() {
                 self.calculate()
@@ -49,7 +57,7 @@ app.controller('controller', function($http, $interval) {
     }
 
     self.calculate = function() {
-        var apiUrl = 'https://api.twitch.tv/kraken/streams/' + self.channelStatus;
+        var apiUrl = 'https://api.twitch.tv/kraken/streams/' + self.channelName;
         $http({
             method: 'GET',
             url: apiUrl
@@ -84,7 +92,7 @@ app.controller('controller', function($http, $interval) {
                 name = 'Viewers';
                 break;
             case 'channelStatus':
-                name = 'Nombre del Canal';
+                name = 'Estado del Canal';
                 break;
             case 'game':
                 name = 'Jugando';

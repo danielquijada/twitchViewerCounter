@@ -95,7 +95,7 @@
               <form role="form" ng-submit="ctrl.toggleCalculate()" class="form-horizontal">
                   <div class="text-center col-sm-12 form-group">
                       <strong class="control-label">Canal</strong>
-                      <input  type="text" class="form-control left" ng-disabled="ctrl.calculating" ng-model="ctrl.channelStatus">
+                      <input  type="text" class="form-control left" ng-disabled="ctrl.calculating" ng-model="ctrl.channelName">
                       <button type="submit" class="btn btn-default" ng-if="!ctrl.calculating">Empezar lectura</button>
                       <button type="submit" class="btn btn-danger" ng-if="ctrl.calculating">Detener lectura</button>
                   </div>
@@ -104,21 +104,21 @@
                   <div class="col-sm-12 form-group">
                       <strong class="control-label col-sm-6">Máximos Viewers</strong>
                       <div class="col-sm-6">
-                          <input type="text" class="form-control left" readonly ng-model="ctrl.data.history.max"></input>
+                          <input type="text" class="form-control left" readonly ng-model="ctrl.history.max"></input>
                       </div>
                       <strong class="control-label col-sm-6">A las</strong>
                       <div class="col-sm-6">
-                          <input type="text" class="form-control left" readonly ng-model="ctrl.data.history.maxTime"></input>
+                          <input type="text" class="form-control left" readonly ng-model="ctrl.history.maxTime"></input>
                       </div>
                   </div>
                   <div class="col-sm-12 form-group">
                       <strong class="control-label col-sm-6">Mínimos Viewers</strong>
                       <div class="col-sm-6">
-                          <input type="text" class="form-control left" readonly ng-model="ctrl.data.history.min"></input>
+                          <input type="text" class="form-control left" readonly ng-model="ctrl.history.min"></input>
                       </div>
                       <strong class="control-label col-sm-6">A las</strong>
                       <div class="col-sm-6">
-                          <input type="text" class="form-control left" readonly ng-model="ctrl.data.history.minTime"></input>
+                          <input type="text" class="form-control left" readonly ng-model="ctrl.history.minTime"></input>
                       </div>
                   </div>
                   <div class="col-sm-12 form-group" ng-if="field !== 'images'" ng-repeat="(field, value) in ctrl.data">
