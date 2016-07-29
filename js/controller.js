@@ -12,9 +12,9 @@ app.controller('controller', function($http, $interval) {
         self.timer = null;
         self.history = {
             'max': 0,
-            'maxTime': new Date(),
+            'maxTime': parseDate(new Date()),
             'min': 100000000,
-            'minDate': new Date()
+            'minTime': parseDate(new Date())
         };
         self.data = {
             "viewers": 0,
@@ -73,12 +73,12 @@ app.controller('controller', function($http, $interval) {
 
             if (self.data.viewers > self.history.max) {
                 self.history.max = self.data.viewers;
-                self.history.maxTime = self.data.date;
+                self.history.maxTime = parseDate(self.data.date);
             }
 
             if (self.data.viewers < self.history.min) {
                 self.history.min = self.data.viewers;
-                self.history.minTime = self.data.date;
+                self.history.minTime = parseDate(self.data.date);
             }
 
             self.history[self.data.date.getTime()] = self.data.viewers;
