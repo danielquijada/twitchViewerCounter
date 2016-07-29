@@ -70,7 +70,7 @@ app.controller('controller', function($http, $interval) {
         var viewers = document.getElementById('viewers').getContext('2d');
         new Chart(viewers, {
             type: "line",
-            data: dat,
+            data: parseChartData(),
         });
     }
 
