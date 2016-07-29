@@ -11,10 +11,12 @@ app.controller('controller', function($http, $interval) {
         self.calculating = false;
         self.timer = null;
         self.history = {
-            'max': 0,
-            'maxTime': parseDate(new Date()),
-            'min': 100000000,
-            'minTime': parseDate(new Date())
+            'minymax': {
+                'max': 0,
+                'maxTime': parseDate(new Date()),
+                'min': 100000000,
+                'minTime': parseDate(new Date())
+            }
         };
         self.data = {
             "viewers": 0,
@@ -64,6 +66,38 @@ app.controller('controller', function($http, $interval) {
         }
     }
 
+    function paintData () {
+        var viewers = document.getElementById('viewers').getContext('2d');
+        new Chart(viewers).Line(parseChartData);
+    }
+
+    function parseChartData () {
+        var labels = [];
+        var values = [];
+
+        Object.keys(self.history).forEach (function(key) {
+            if (key != 'minymax') {
+                labels.push(key);
+                values.push(self.history[key]);
+            }
+        });
+
+        var data {
+            labels: labels,
+            datasets : [
+        		{
+        			fillColor : "rgba(172,194,132,0.4)",
+        			strokeColor : "#ACC26D",
+        			pointColor : "#fff",
+        			pointStrokeColor : "#9DB86D",
+        			data : values
+        		}
+        	]
+        };
+
+        return data;
+    }
+
     function downloadHistory () {
         var content = JSON.stringify(self.history);
         var uriContent = "data:application/octet-stream;filename=history.json," + encodeURIComponent(content);
@@ -99,17 +133,18 @@ app.controller('controller', function($http, $interval) {
             self.data.images.preview = response.data.stream.preview.large;
             self.data.images.logo = response.data.stream.channel.logo;
 
-            if (self.data.viewers > self.history.max) {
-                self.history.max = self.data.viewers;
-                self.history.maxTime = parseDate(self.data.date);
+            if (self.data.viewers > self.history.minymax.max) {
+                self.history.minymax.max = self.data.viewers;
+                self.history.minymax.maxTime = parseDate(self.data.date);
             }
 
-            if (self.data.viewers < self.history.min) {
-                self.history.min = self.data.viewers;
-                self.history.minTime = parseDate(self.data.date);
+            if (self.data.viewers < self.history.minymax.min) {
+                self.history.minymax.min = self.data.viewers;
+                self.history.minymax.minTime = parseDate(self.data.date);
             }
 
             self.history[self.data.date.getTime()] = self.data.viewers;
+            paintData();
         })
     }
 

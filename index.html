@@ -90,7 +90,8 @@
     <section id="application">
       <div class="container">
           <div ng-app="counter" ng-controller="controller as ctrl">
-              <img class="img-responsive" ng-src="{{ctrl.data.images.logo}}" alt="{{ctrl.data.images.logo}}">
+              <img class="img-responsive col-sm-4" ng-src="{{ctrl.data.images.logo}}" alt="{{ctrl.data.images.logo}}">
+              <canvas class="col-sm-8" id="viewers" height="auto"></canvas>
 
               <form role="form" ng-submit="ctrl.toggleCalculate()" class="form-horizontal">
                   <div class="text-center col-sm-12 form-group">
@@ -104,21 +105,21 @@
                   <div class="col-sm-12 form-group">
                       <strong class="control-label col-sm-6">Máximos Viewers</strong>
                       <div class="col-sm-6">
-                          <input type="text" class="form-control left" readonly ng-model="ctrl.history.max"></input>
+                          <input type="text" class="form-control left" readonly ng-model="ctrl.history.minymax.max"></input>
                       </div>
                       <strong class="control-label col-sm-6">A las</strong>
                       <div class="col-sm-6">
-                          <input type="text" class="form-control left" readonly ng-model="ctrl.history.maxTime"></input>
+                          <input type="text" class="form-control left" readonly ng-model="ctrl.history.minymax.maxTime"></input>
                       </div>
                   </div>
                   <div class="col-sm-12 form-group">
                       <strong class="control-label col-sm-6">Mínimos Viewers</strong>
                       <div class="col-sm-6">
-                          <input type="text" class="form-control left" readonly ng-model="ctrl.history.min"></input>
+                          <input type="text" class="form-control left" readonly ng-model="ctrl.history.minymax.min"></input>
                       </div>
                       <strong class="control-label col-sm-6">A las</strong>
                       <div class="col-sm-6">
-                          <input type="text" class="form-control left" readonly ng-model="ctrl.history.minTime"></input>
+                              <input type="text" class="form-control left" readonly ng-model="ctrl.history.minymax.minTime"></input>
                       </div>
                   </div>
                   <div class="col-sm-12 form-group" ng-if="field !== 'images'" ng-repeat="(field, value) in ctrl.data">
@@ -213,6 +214,8 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
+    <script src='js/Chart.min.js'></script>
+
 
     <!-- Plugin JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
