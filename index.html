@@ -101,10 +101,11 @@
                   </div>
                   <hr>
                   <h1>{{ctrl.data.channelName}}</h1>
-                  <div class="col-sm-12 form-group" ng-if="field != 'images'" ng-repeat="(field, value) in ctrl.data">
+                  <div class="col-sm-12 form-group" ng-if="field !== 'images'" ng-repeat="(field, value) in ctrl.data">
                       <strong class="control-label col-sm-6">{{field}}</strong>
                       <div class="col-sm-6">
-                          <input type="text" class="form-control left" readonly ng-model="value"></input>
+                          <input type="text" class="form-control left" readonly ng-model="value" ng-if="field !== date"></input>
+                          <input type="text" class="form-control left" readonly ng-model="ctrl.parseDate(value)" ng-if="field === date"></input>
                       </div>
                   </div>
               </form>

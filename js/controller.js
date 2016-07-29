@@ -17,7 +17,7 @@ app.controller('controller', function($http, $interval) {
         }
     }
 
-    self.toggleCalculate() {
+    self.toggleCalculate = function () {
         self.calculating = !self.calculating;
 
         if (self.calculating) {
@@ -44,11 +44,31 @@ app.controller('controller', function($http, $interval) {
             url: apiUrl
         }).then (function success(response) {
             self.loading = false;
+            self.data.date = new Date();
             self.data.channelName = self.channelName;
             self.data.game = response.data.stream.game;
             self.data.viewers = response.data.stream.viewers;
             self.data.images.preview = response.data.stream.preview.large;
             self.data.images.logo = response.data.stream.channel.logo;
         })
+    }
+
+    self.parseDate = function (date) {
+        return parseDay(date.getDate()) + "/" + parseMonth(date.getMonth()) + "/" + date.getFullYear() + " - " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+    }
+
+    function parseDay (day) {
+        if (day < 10) {
+            day = '0' + day;
+        }
+        return day;
+    }
+
+    function parseMonth (month) {
+        month = month + 1;
+        if (month < 10) {
+            month = '0' + month;
+        }
+        return month;
     }
 });
