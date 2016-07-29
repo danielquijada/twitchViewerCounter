@@ -66,11 +66,11 @@ app.controller('controller', function($http, $interval) {
 
     function downloadHistory () {
         var content = JSON.stringify(self.history);
-        var uriContent = encodeURIComponent(content);
+        var uriContent = "data:application/octet-stream;filename=history.json," + encodeURIComponent(content);
         var filename = 'history.json';
         saveAs(uriContent, filename);
     }
-    
+
     function saveAs(uri, filename) {
         var link = document.createElement('a');
         if (typeof link.download === 'string') {
