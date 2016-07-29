@@ -82,8 +82,8 @@ app.controller('controller', function($http, $interval) {
             }
         });
 
-        var data {
-            labels: labels,
+        var data = {
+            labels : labels,
             datasets : [
         		{
         			fillColor : "rgba(172,194,132,0.4)",
