@@ -92,11 +92,12 @@
           <div ng-app="counter" ng-controller="controller as ctrl">
               <img class="img-responsive" ng-src="{{ctrl.data.images.logo}}" alt="{{ctrl.data.images.logo}}">
 
-              <form role="form" ng-submit="ctrl.calculate()" class="form-horizontal">
+              <form role="form" ng-submit="ctrl.toggleCalculate()" class="form-horizontal">
                   <div class="text-center col-sm-12 form-group">
                       <strong class="control-label col-sm-6">Canal</strong>
-                      <input  type="text" class="form-control left" ng-model="ctrl.channelName">
-                      <button type="submit" class="btn btn-default" ng-disabled="ctrl.loading">Ver Datos</button>
+                      <input  type="text" class="form-control left" ng-disabled="ctrl.calculating" ng-model="ctrl.channelName">
+                      <button type="submit" class="btn btn-default" ng-if="!ctrl.calculating">Empezar lectura</button>
+                      <button type="submit" class="btn btn-danger" ng-if="ctrl.calculating">Detener lectura</button>
                   </div>
                   <hr>
                   <h1>{{ctrl.data.channelName}}</h1>

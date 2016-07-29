@@ -1,9 +1,12 @@
 var app = angular.module('counter', []);
 
-app.controller('controller', function($http) {
+app.controller('controller', function($http, $interval) {
     var self = this;
+    var TIMEOUT = 5000;
 
-    self.loading = false;
+    self.calculating = false;
+    self.timer = null;
+
     self.data = {
         "viewers": 0,
         "channelName": "you",
@@ -14,12 +17,27 @@ app.controller('controller', function($http) {
         }
     }
 
-    self.calculate = function() {
-        console.log("CALCULATE", self.loading);
-        if (self.loading) {
-            return;
+    self.toggleCalculate() {
+        self.calculating = !self.calculating;
+
+        if (self.calculating) {
+            startCalculate();
+        } else {
+            stopCalculate();
         }
-        self.loading=true;
+    }
+
+    function startCalculate () {
+        self.calculating = true;
+        self.timer = $interval (self.calculate(), TIMEOUT);
+    }
+
+    function stopCalculate () {
+        self.calculating = false;
+        $interval.cancel(self.timer);
+    }
+
+    self.calculate = function() {
         var apiUrl = 'https://api.twitch.tv/kraken/streams/' + self.channelName;
         $http({
             method: 'GET',
