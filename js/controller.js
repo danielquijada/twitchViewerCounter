@@ -89,7 +89,7 @@ app.controller('controller', function($http, $interval) {
             labels : labels,
             datasets : [
         		{
-                    label: '# de Viewers'
+                    label : "# de Viewers",
         			fillColor : "rgba(172,194,132,0.4)",
         			strokeColor : "#ACC26D",
         			pointColor : "#fff",
