@@ -39,7 +39,7 @@ app.controller('controller', function($http, $interval) {
         $interval.cancel(self.timer);
     }
 
-    self.test() {
+    self.test = function() {
         console.log(self.calculating, "pepe dijo pepe a las " + new Date());
     }
 
