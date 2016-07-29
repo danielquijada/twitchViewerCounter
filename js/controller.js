@@ -2,7 +2,7 @@ var app = angular.module('counter', []);
 
 app.controller('controller', function($http, $interval) {
     var self = this;
-    var TIMEOUT = 5000;
+    var TIMEOUT = 100;
 
     self.calculating = false;
     self.timer = null;
@@ -11,6 +11,7 @@ app.controller('controller', function($http, $interval) {
         "viewers": 0,
         "channelName": "you",
         "game": "none",
+        "date": new Date(),
         "images":{
             "preview": "http://s.jtvnw.net/jtv_user_pictures/hosted_images/GlitchIcon_WhiteonPurple.png",
             "logo": "http://s.jtvnw.net/jtv_user_pictures/hosted_images/GlitchIcon_WhiteonPurple.png"
