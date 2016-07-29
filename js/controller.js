@@ -66,9 +66,22 @@ app.controller('controller', function($http, $interval) {
 
     function downloadHistory () {
         var content = JSON.stringify(self.history);
-        var uriContent = "data:application/octet-stream;filename=history.json," + encodeURIComponent(content);
-        newWindow = window.open(uriContent, 'history.json');
-
+        var uriContent = encodeURIComponent(content);
+        var filename = 'history.json';
+        saveAs(uriContent, filename);
+    }
+    
+    function saveAs(uri, filename) {
+        var link = document.createElement('a');
+        if (typeof link.download === 'string') {
+            document.body.appendChild(link); // Firefox requires the link to be in the body
+            link.download = filename;
+            link.href = uri;
+            link.click();
+            document.body.removeChild(link); // remove the link when done
+        } else {
+            location.replace(uri);
+        }
     }
 
     self.calculate = function() {
