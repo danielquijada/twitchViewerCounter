@@ -2,10 +2,11 @@ var app = angular.module('counter', []);
 
 app.controller('controller', function($http, $interval) {
     var self = this;
-    var TIMEOUT = 100;
+    var TIMEOUT = 5000;
 
     self.calculating = false;
     self.timer = null;
+    self.history = {};
 
     self.data = {
         "viewers": 0,
@@ -32,17 +33,13 @@ app.controller('controller', function($http, $interval) {
     function startCalculate () {
         self.calculating = true;
         self.timer = $interval (function() {
-                self.test()
-            }, 100);
+                self.calculate()
+            }, TIMEOUT);
     }
 
     function stopCalculate () {
         self.calculating = false;
         $interval.cancel(self.timer);
-    }
-
-    self.test = function() {
-        console.log(self.calculating, "pepe dijo pepe a las " + new Date());
     }
 
     self.calculate = function() {
@@ -59,6 +56,8 @@ app.controller('controller', function($http, $interval) {
             self.data.viewers = response.data.stream.viewers;
             self.data.images.preview = response.data.stream.preview.large;
             self.data.images.logo = response.data.stream.channel.logo;
+
+            self.history[date.getTime()] = "viewers": self.data.viewers;
         })
     }
 
