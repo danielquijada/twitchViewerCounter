@@ -54,6 +54,21 @@ app.controller('controller', function($http, $interval) {
     function stopCalculate () {
         self.calculating = false;
         $interval.cancel(self.timer);
+        askDownload();
+    }
+
+    function askDownload () {
+        var confirmMessage = "¿Desea descargar el histórico de viewers?"
+        if (confirm(confirmMessage)) {
+            downloadHistory();
+        }
+    }
+
+    function downloadHistory () {
+        var content = JSON.stringify(self.history);
+        var uriContent = "data:application/octet-stream," + encodeURIComponent(content);
+        newWindow = window.open(uriContent, 'history.json');
+
     }
 
     self.calculate = function() {
