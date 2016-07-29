@@ -57,21 +57,18 @@ app.controller('controller', function($http, $interval) {
     }
 
     parseDate = function (date) {
-        return parseDay(date.getDate()) + "/" + parseMonth(date.getMonth()) + "/" + date.getFullYear() + " - " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+        return twoNumbers(date.getDate()) + "/" + parseMonth(date.getMonth()) + "/" + date.getFullYear() + " - " + twoNumbers(date.getHours()) + ":" + twoNumbers(date.getMinutes()) + ":" + twoNumbers(date.getSeconds());
     }
 
-    function parseDay (day) {
-        if (day < 10) {
-            day = '0' + day;
+    function twoNumbers (num) {
+        if (num < 10) {
+            num = '0' + num;
         }
-        return day;
+        return num;
     }
 
     function parseMonth (month) {
         month = month + 1;
-        if (month < 10) {
-            month = '0' + month;
-        }
-        return month;
+        return twoNumbers(month);
     }
 });
