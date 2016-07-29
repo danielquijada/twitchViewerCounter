@@ -4,7 +4,6 @@ app.controller('controller', function($http, $interval) {
     var self = this;
     var TIMEOUT = 5000;
 
-    self.initDefaults();
     self.channelName = 'Ealyn';
     self.lastCheckedName = 'Ealyn';
 
@@ -27,8 +26,9 @@ app.controller('controller', function($http, $interval) {
                 "logo": "http://s.jtvnw.net/jtv_user_pictures/hosted_images/GlitchIcon_WhiteonPurple.png"
             }
         }
+        self.parsedDate = parseDate(self.data.date);
     }
-    self.parsedDate = parseDate(self.data.date);
+    self.initDefaults();
 
     self.toggleCalculate = function () {
         self.calculating = !self.calculating;
