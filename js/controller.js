@@ -7,10 +7,11 @@ app.controller('controller', function($http, $interval) {
     self.calculating = false;
     self.timer = null;
     self.history = {};
-
+    self.channelStatus = 'Ealyn';
+    
     self.data = {
         "viewers": 0,
-        "channelName": "you",
+        "channelStatus": "you",
         "game": "none",
         "date": new Date(),
         "images":{
@@ -43,7 +44,7 @@ app.controller('controller', function($http, $interval) {
     }
 
     self.calculate = function() {
-        var apiUrl = 'https://api.twitch.tv/kraken/streams/' + self.channelName;
+        var apiUrl = 'https://api.twitch.tv/kraken/streams/' + self.channelStatus;
         $http({
             method: 'GET',
             url: apiUrl
@@ -51,14 +52,33 @@ app.controller('controller', function($http, $interval) {
             self.loading = false;
             self.data.date = new Date();
             self.parsedDate = parseDate(self.data.date);
-            self.data.channelName = self.channelName;
+            self.data.channelStatus = response.data.stream.channel.status;
             self.data.game = response.data.stream.game;
             self.data.viewers = response.data.stream.viewers;
             self.data.images.preview = response.data.stream.preview.large;
             self.data.images.logo = response.data.stream.channel.logo;
 
-            self.history[date.getTime()] = self.data.viewers;
+            self.history[self.data.date.getTime()] = self.data.viewers;
         })
+    }
+
+    self.getName(field) {
+        var name = field;
+        switch (field) {
+            case 'viewers':
+                name = 'Viewers';
+                break;
+            case 'channelStatus':
+                name = 'Nombre del Canal';
+                break;
+            case 'game':
+                name = 'Jugando';
+                break;
+            case 'date':
+                name = 'Fecha de la última actualización';
+                break;
+        }
+        return name;
     }
 
     function parseDate (date) {
