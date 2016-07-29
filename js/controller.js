@@ -17,6 +17,7 @@ app.controller('controller', function($http, $interval) {
             "logo": "http://s.jtvnw.net/jtv_user_pictures/hosted_images/GlitchIcon_WhiteonPurple.png"
         }
     }
+    self.parsedDate = parseDate(self.data.date);
 
     self.toggleCalculate = function () {
         self.calculating = !self.calculating;
@@ -46,6 +47,7 @@ app.controller('controller', function($http, $interval) {
         }).then (function success(response) {
             self.loading = false;
             self.data.date = new Date();
+            self.parsedDate = parseDate(self.data.date);
             self.data.channelName = self.channelName;
             self.data.game = response.data.stream.game;
             self.data.viewers = response.data.stream.viewers;
@@ -54,7 +56,7 @@ app.controller('controller', function($http, $interval) {
         })
     }
 
-    self.parseDate = function (date) {
+    parseDate = function (date) {
         return parseDay(date.getDate()) + "/" + parseMonth(date.getMonth()) + "/" + date.getFullYear() + " - " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
     }
 

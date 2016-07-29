@@ -105,7 +105,7 @@
                       <strong class="control-label col-sm-6">{{field}}</strong>
                       <div class="col-sm-6">
                           <input type="text" class="form-control left" readonly ng-model="value" ng-if="field !== 'date'"></input>
-                          <input type="text" class="form-control left" readonly ng-model="ctrl.parseDate(value)" ng-if="field === 'date'"></input>
+                          <input type="text" class="form-control left" readonly ng-model="ctrl.parsedDate" ng-if="field === 'date'"></input>
                       </div>
                   </div>
               </form>
