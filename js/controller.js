@@ -68,7 +68,10 @@ app.controller('controller', function($http, $interval) {
 
     function paintData () {
         var viewers = document.getElementById('viewers').getContext('2d');
-        new Chart(viewers).Line(parseChartData());
+        new Chart(viewers, {
+            type: "line",
+            data: dat,
+        });
     }
 
     function parseChartData () {
