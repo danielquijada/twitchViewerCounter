@@ -111,7 +111,7 @@ app.controller('controller', function ($http, $interval) {
             datasets: [
                 {
                     label: "# de Viewers",
-                    backgroundColor: "#ccc",
+                    backgroundColor: "rgba(238,238,238,0.6)",
                     borderColor: "#888",
                     pointBorderColor: "#888",
                     data: viewers,
