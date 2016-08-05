@@ -176,11 +176,11 @@ app.controller('controller', function($http, $interval) {
 
     function parseTime (time) {
         var ms = time % 1000;
-        time = time / 1000;
+        time = Math.round(time / 1000);
         var s = time % 60;
-        time = time / 60;
+        time = Math.round(time / 60);
         var min = time % 60;
-        time = time / 60;
+        time = Math.round(time / 60);
         var h = time;
 
         var next = false;
@@ -204,7 +204,7 @@ app.controller('controller', function($http, $interval) {
             s = "";
         }
         if (ms || true) {
-            ms = ms + "h";
+            ms = ms + "ms";
             next = true;
         } else {
             ms = "";
