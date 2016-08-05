@@ -3,6 +3,7 @@ var app = angular.module('counter', []);
 app.controller('controller', function($http, $interval) {
     var self = this;
     var TIMEOUT = 60000;
+    var chart;
 
     self.channelName = 'Ealyn';
     self.lastCheckedName = 'Ealyn';
@@ -75,7 +76,8 @@ app.controller('controller', function($http, $interval) {
 
     function paintData () {
         var viewers = document.getElementById('viewers').getContext('2d');
-        new Chart(viewers, {
+        chart.destroy();
+        chart = new Chart(viewers, {
             type: "line",
             data: parseChartData(),
         });
