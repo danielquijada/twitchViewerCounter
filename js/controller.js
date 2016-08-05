@@ -1,6 +1,6 @@
 var app = angular.module('counter', []);
 
-app.controller('controller', function($http, $interval) {
+app.controller('controller', function ($http, $interval) {
     var self = this;
     var TIMEOUT = 60000;
     var chart;
@@ -30,7 +30,7 @@ app.controller('controller', function($http, $interval) {
             "channelStatus": "Hello World!",
             "game": "I don't play.",
             "date": new Date(),
-            "images":{
+            "images": {
                 "preview": "http://s.jtvnw.net/jtv_user_pictures/hosted_images/GlitchIcon_WhiteonPurple.png",
                 "logo": "http://s.jtvnw.net/jtv_user_pictures/hosted_images/GlitchIcon_WhiteonPurple.png"
             }
@@ -49,46 +49,57 @@ app.controller('controller', function($http, $interval) {
         }
     }
 
-    function startCalculate () {
+    function startCalculate() {
         if (self.channelName !== self.lastCheckedName) {
             self.initDefaults();
             self.lastCheckedName = self.channelName;
         }
         self.calculating = true;
         self.calculate();
-        self.timer = $interval (function() {
-                self.calculate();
-            }, TIMEOUT);
+        self.timer = $interval(function () {
+            self.calculate();
+        }, TIMEOUT);
     }
 
-    function stopCalculate () {
+    function stopCalculate() {
         self.calculating = false;
         $interval.cancel(self.timer);
         askDownload();
     }
 
-    function askDownload () {
+    function askDownload() {
         var confirmMessage = "¿Desea descargar el histórico de viewers?"
         if (confirm(confirmMessage)) {
             downloadHistory();
         }
     }
 
-    function paintData (viewers, time) {
+    function paintData(viewers, time) {
         var viewers = document.getElementById('viewers').getContext('2d');
         if (!chart) {
-            chart = new Chart(viewers);
-            chart.Line(chartData(), {animationSteps: 15});
+            chart = new Chart(viewers, {
+                type: "line",
+                data: parseChartData(),
+            });
         } else {
-            chart.addData([viewers], time);
+            addData(chart, [viewers], time);
         }
     }
 
-    function chartData () {
+    function addData(chart, newData, label) {
+        chart.data.labels.push(label); // add new label at end
+        
+        chart.data.datsets.forEach(function (dataset, index) {
+            dataset.data.push(newData[index]); // add new data at end
+        });
+        chart.update();
+    }
+
+    function parseChartData() {
         var labels = [];
         var values = [];
 
-        Object.keys(self.history).forEach (function(key) {
+        Object.keys(self.history).forEach(function (key) {
             if (key != 'minymax') {
                 labels.push(parseDate(new Date(+key)));
                 values.push(self.history[key]);
@@ -96,24 +107,24 @@ app.controller('controller', function($http, $interval) {
         });
 
         var data = {
-            labels : labels,
-            datasets : [
-        		{
-                    label : "# de Viewers",
-        			fillColor : "rgba(172,194,132,0.4)",
-        			strokeColor : "#ACC26D",
-        			pointColor : "#fff",
-        			pointStrokeColor : "#9DB86D",
-        			data : values,
+            labels: labels,
+            datasets: [
+                {
+                    label: "# de Viewers",
+                    fillColor: "rgba(172,194,132,0.4)",
+                    strokeColor: "#ACC26D",
+                    pointColor: "#fff",
+                    pointStrokeColor: "#9DB86D",
+                    data: values,
                     lineTension: 0
-        		}
-        	]
+                }
+            ]
         };
 
         return data;
     }
 
-    function downloadHistory () {
+    function downloadHistory() {
         var content = JSON.stringify(self.history);
         var uriContent = "data:application/octet-stream;filename=history.json," + encodeURIComponent(content);
         var filename = 'history.json';
@@ -133,12 +144,12 @@ app.controller('controller', function($http, $interval) {
         }
     }
 
-    self.calculate = function() {
+    self.calculate = function () {
         var apiUrl = 'https://api.twitch.tv/kraken/streams/' + self.channelName;
         $http({
             method: 'GET',
             url: apiUrl
-        }).then (function success(response) {
+        }).then(function success(response) {
             self.loading = false;
             self.data.date = new Date();
             self.parsedDate = parseDate(self.data.date);
@@ -153,14 +164,14 @@ app.controller('controller', function($http, $interval) {
             } else {
                 var date = new Date();
                 self.history.minymax.totalTime = date.getTime() - self.history.minymax.startDate.getTime();
-                self.history.minymax.parsedTotalTime = parseTime (self.history.minymax.totalTime);
+                self.history.minymax.parsedTotalTime = parseTime(self.history.minymax.totalTime);
             }
 
             var total = self.history.minymax.mean * self.history.minymax.count;
             self.history.minymax.count++;
             total += self.data.viewers;
             self.history.minymax.mean = total / self.history.minymax.count;
-            self.history.minymax.parsedMean = parseNumber (self.history.minymax.mean);
+            self.history.minymax.parsedMean = parseNumber(self.history.minymax.mean);
 
             if (self.data.viewers > self.history.minymax.max) {
                 self.history.minymax.max = self.data.viewers;
@@ -177,7 +188,7 @@ app.controller('controller', function($http, $interval) {
         })
     }
 
-    function parseTime (time) {
+    function parseTime(time) {
         var ms = time % 1000;
         time = Math.round(time / 1000);
         var s = time % 60;
@@ -215,12 +226,12 @@ app.controller('controller', function($http, $interval) {
         return h + " " + min + " " + s + " " + ms;
     }
 
-    function parseNumber (number) {
+    function parseNumber(number) {
         var zeroes = 100;
         return '' + (Math.round(number * zeroes) / zeroes);
     }
 
-    self.getName = function(field) {
+    self.getName = function (field) {
         var name = field;
         switch (field) {
             case 'viewers':
@@ -239,18 +250,18 @@ app.controller('controller', function($http, $interval) {
         return name;
     }
 
-    function parseDate (date) {
+    function parseDate(date) {
         return twoNumbers(date.getDate()) + "/" + parseMonth(date.getMonth()) + "/" + date.getFullYear() + " - " + twoNumbers(date.getHours()) + ":" + twoNumbers(date.getMinutes()) + ":" + twoNumbers(date.getSeconds());
     }
 
-    function twoNumbers (num) {
+    function twoNumbers(num) {
         if (num < 10) {
             num = '0' + num;
         }
         return num;
     }
 
-    function parseMonth (month) {
+    function parseMonth(month) {
         month = month + 1;
         return twoNumbers(month);
     }
