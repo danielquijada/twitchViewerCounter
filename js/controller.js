@@ -15,7 +15,11 @@ app.controller('controller', function($http, $interval) {
                 'max': 0,
                 'maxTime': parseDate(new Date()),
                 'min': 100000000,
-                'minTime': parseDate(new Date())
+                'minTime': parseDate(new Date()),
+                'mean': 0,
+                'totalTime': 0,
+                'count': 0,
+                'firstDate': new Date()
             }
         };
         self.data = {
@@ -138,6 +142,18 @@ app.controller('controller', function($http, $interval) {
             self.data.viewers = response.data.stream.viewers;
             self.data.images.preview = response.data.stream.preview.large;
             self.data.images.logo = response.data.stream.channel.logo;
+
+            if (self.history.minymax.count === 0) {
+                self.history.minymax.startDate = new Date();
+            } else {
+                var date = new Date();
+                self.history.minymax.totalTime = date.getTime() - self.history.minymax.startDate.getTime();
+            }
+
+            var total = self.history.minymax.mean * self.history.minymax.count;
+            self.history.minymax.count++;
+            total += self.data.viewers;
+            self.history.minymax.mean = total / self.history.minymax.count;
 
             if (self.data.viewers > self.history.minymax.max) {
                 self.history.minymax.max = self.data.viewers;
