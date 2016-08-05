@@ -125,7 +125,7 @@ app.controller('controller', function ($http, $interval) {
                     pointColor: "#333",
                     data: JSON.parse(JSON.stringify(viewers)),
                     lineTension: 0
-                },
+                }
             ]
         };
 
