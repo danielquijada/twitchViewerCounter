@@ -77,10 +77,7 @@ app.controller('controller', function($http, $interval) {
     function paintData (viewers, time) {
         var viewers = document.getElementById('viewers').getContext('2d');
         if (!chart) {
-            chart = new Chart(viewers, {
-                type: "line",
-                data: parseChartData(),
-            });
+            chart = new Chart(viewers).Line(parseChartData(), {animationSteps: 15});
         } else {
             chart.addData([viewers], time);
         }
