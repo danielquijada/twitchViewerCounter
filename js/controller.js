@@ -111,18 +111,17 @@ app.controller('controller', function ($http, $interval) {
             datasets: [
                 {
                     label: "# de Viewers",
-                    fillColor: "rgba(172,194,132,0.4)",
-                    borderColor: "rgba(150,150,150,0.7)",
-                    pointBorderColor: "rgba(150,150,150,0.7)",
-                    pointStrokeColor: "#9DB86D",
+                    fillColor: "#ccc",
+                    borderColor: "#888",
+                    pointBorderColor: "#888",
                     data: viewers,
                     lineTension: 0
                 },
                 {
                     label: "Media",
                     fill: false,
-                    borderColor: "rgba(0,0,0,1)",
-                    pointBorderColor: "rgba(0,0,0,1)",
+                    borderColor: "#000",
+                    pointBorderColor: "#000",
                     data: JSON.parse(JSON.stringify(viewers)),
                     lineTension: 0
                 }
