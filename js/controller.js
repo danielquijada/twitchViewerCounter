@@ -82,7 +82,7 @@ app.controller('controller', function ($http, $interval) {
                 data: parseChartData(),
             });
         } else {
-            addData(chart, [numViewers, meanViewers], time);
+            addData(chart, [meanViewers, numViewers], time);
         }
     }
 
@@ -110,20 +110,20 @@ app.controller('controller', function ($http, $interval) {
             labels: labels,
             datasets: [
                 {
-                    label: "# de Viewers",
-                    backgroundColor: "rgba(238,238,238,0.6)",
-                    borderColor: "#888",
-                    pointBorderColor: "#888",
-                    data: viewers,
-                    lineTension: 0
-                },
-                {
                     label: "Media",
                     fill: false,
                     backgroundColor: "#000",
                     borderColor: "#000",
                     pointBorderColor: "#000",
                     data: JSON.parse(JSON.stringify(viewers)),
+                    lineTension: 0
+                },
+                {
+                    label: "# de Viewers",
+                    backgroundColor: "rgba(248,248,248,0.7)",
+                    borderColor: "#888",
+                    pointBorderColor: "#888",
+                    data: viewers,
                     lineTension: 0
                 }
             ]
