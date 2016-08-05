@@ -2,7 +2,7 @@ var app = angular.module('counter', []);
 
 app.controller('controller', function ($http, $interval) {
     var self = this;
-    var TIMEOUT = 5000;
+    var TIMEOUT = 60000;
     var chart;
 
     self.channelName = 'Ealyn';
