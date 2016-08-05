@@ -111,7 +111,7 @@ app.controller('controller', function ($http, $interval) {
             datasets: [
                 {
                     label: "# de Viewers",
-                    fillColor: "#ccc",
+                    backgroundColor: "#ccc",
                     borderColor: "#888",
                     pointBorderColor: "#888",
                     data: viewers,
@@ -120,7 +120,7 @@ app.controller('controller', function ($http, $interval) {
                 {
                     label: "Media",
                     fill: false,
-                    fillColor: "#000",
+                    backgroundColor: "#000",
                     borderColor: "#000",
                     pointBorderColor: "#000",
                     data: JSON.parse(JSON.stringify(viewers)),
