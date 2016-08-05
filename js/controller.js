@@ -74,7 +74,7 @@ app.controller('controller', function ($http, $interval) {
         }
     }
 
-    function paintData(newData, time) {
+    function paintData(numViewers, meanViewers, time) {
         var viewers = document.getElementById('viewers').getContext('2d');
         if (!chart) {
             chart = new Chart(viewers, {
@@ -82,7 +82,7 @@ app.controller('controller', function ($http, $interval) {
                 data: parseChartData(),
             });
         } else {
-            addData(chart, [newData], time);
+            addData(chart, [numViewers, meanViewers], time);
         }
     }
 
@@ -97,12 +97,12 @@ app.controller('controller', function ($http, $interval) {
 
     function parseChartData() {
         var labels = [];
-        var values = [];
+        var viewers = [];
 
         Object.keys(self.history).forEach(function (key) {
             if (key != 'minymax') {
                 labels.push(parseDate(new Date(+key)));
-                values.push(self.history[key]);
+                viewers.push(self.history[key]);
             }
         });
 
@@ -115,9 +115,17 @@ app.controller('controller', function ($http, $interval) {
                     strokeColor: "#ACC26D",
                     pointColor: "#fff",
                     pointStrokeColor: "#9DB86D",
-                    data: values,
+                    data: viewers,
                     lineTension: 0
-                }
+                },
+                {
+                    label: "Media",
+                    fill: false,
+                    strokeColor: "#000",
+                    pointColor: "#333",
+                    data: JSON.parse(JSON.stringify(viewers)),
+                    lineTension: 0
+                },
             ]
         };
 
@@ -134,11 +142,11 @@ app.controller('controller', function ($http, $interval) {
     function saveAs(uri, filename) {
         var link = document.createElement('a');
         if (typeof link.download === 'string') {
-            document.body.appendChild(link); // Firefox requires the link to be in the body
+            document.body.appendChild(link);
             link.download = filename;
             link.href = uri;
             link.click();
-            document.body.removeChild(link); // remove the link when done
+            document.body.removeChild(link);
         } else {
             location.replace(uri);
         }
@@ -184,7 +192,7 @@ app.controller('controller', function ($http, $interval) {
             }
 
             self.history[self.data.date.getTime()] = self.data.viewers;
-            paintData(self.data.viewers, self.data.date.getTime());
+            paintData(self.data.viewers, self.history.minymax.mean, self.data.date.getTime());
         })
     }
 
