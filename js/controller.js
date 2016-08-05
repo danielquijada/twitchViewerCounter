@@ -18,6 +18,8 @@ app.controller('controller', function($http, $interval) {
                 'minTime': parseDate(new Date()),
                 'mean': 0,
                 'totalTime': 0,
+                'parsedMean': '0',
+                'parsedTotalTime': '0',
                 'count': 0,
                 'firstDate': new Date()
             }
@@ -148,12 +150,14 @@ app.controller('controller', function($http, $interval) {
             } else {
                 var date = new Date();
                 self.history.minymax.totalTime = date.getTime() - self.history.minymax.startDate.getTime();
+                self.history.minymax.parsedTotalTime = parseTime (self.history.minymax.totalTime);
             }
 
             var total = self.history.minymax.mean * self.history.minymax.count;
             self.history.minymax.count++;
             total += self.data.viewers;
             self.history.minymax.mean = total / self.history.minymax.count;
+            self.history.minymax.parsedMean = parseNumber (self.history.minymax.mean);
 
             if (self.data.viewers > self.history.minymax.max) {
                 self.history.minymax.max = self.data.viewers;
@@ -168,6 +172,49 @@ app.controller('controller', function($http, $interval) {
             self.history[self.data.date.getTime()] = self.data.viewers;
             paintData();
         })
+    }
+
+    function parseTime (time) {
+        var ms = time % 1000;
+        time = time / 1000;
+        var s = time % 60;
+        time = time / 60;
+        var min = time % 60;
+        time = time / 60;
+        var h = time;
+
+        var next = false;
+
+        if (h) {
+            h = h + "h";
+            next = true;
+        } else {
+            h = "";
+        }
+        if (min || true) {
+            min = min + "min";
+            next = true;
+        } else {
+            min = "";
+        }
+        if (s || true) {
+            s = s + "s";
+            next = true;
+        } else {
+            s = "";
+        }
+        if (ms || true) {
+            ms = ms + "h";
+            next = true;
+        } else {
+            ms = "";
+        }
+        return h + " " + min + " " + s + " " + ms;
+    }
+
+    function parseNumber (number) {
+        var zeroes = 100;
+        return '' + (Math.round(number * zeroes) / zeroes);
     }
 
     self.getName = function(field) {
