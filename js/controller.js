@@ -74,7 +74,7 @@ app.controller('controller', function($http, $interval) {
         }
     }
 
-    function paintData (viewers) {
+    function paintData (viewers, time) {
         var viewers = document.getElementById('viewers').getContext('2d');
         if (!chart) {
             chart = new Chart(viewers, {
@@ -82,7 +82,7 @@ app.controller('controller', function($http, $interval) {
                 data: parseChartData(),
             });
         } else {
-            chart.addData(viewers)
+            chart.addData([viewers], time);
         }
     }
 
@@ -175,7 +175,7 @@ app.controller('controller', function($http, $interval) {
             }
 
             self.history[self.data.date.getTime()] = self.data.viewers;
-            paintData(self.data.viewers);
+            paintData(self.data.viewers, self.data.date.getTime());
         })
     }
 
