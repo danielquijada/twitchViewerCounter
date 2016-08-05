@@ -77,13 +77,13 @@ app.controller('controller', function($http, $interval) {
     function paintData (viewers, time) {
         var viewers = document.getElementById('viewers').getContext('2d');
         if (!chart) {
-            chart = new Chart(viewers).Line(parseChartData(), {animationSteps: 15});
+            chart = new Chart(viewers).Line(chartData(), {animationSteps: 15});
         } else {
             chart.addData([viewers], time);
         }
     }
 
-    function parseChartData () {
+    function chartData () {
         var labels = [];
         var values = [];
 
