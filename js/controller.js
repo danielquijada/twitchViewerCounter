@@ -89,7 +89,7 @@ app.controller('controller', function ($http, $interval) {
     function addData(chart, newData, label) {
         chart.data.labels.push(label); // add new label at end
         
-        chart.data.datsets.forEach(function (dataset, index) {
+        chart.data.datasets.forEach(function (dataset, index) {
             dataset.data.push(newData[index]); // add new data at end
         });
         chart.update();
