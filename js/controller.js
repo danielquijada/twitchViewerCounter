@@ -114,7 +114,6 @@ app.controller('controller', function ($http, $interval) {
                     fillColor: "rgba(172,194,132,0.4)",
                     borderColor: "rgba(150,150,150,0.7)",
                     pointBorderColor: "rgba(150,150,150,0.7)",
-                    pointBackgroundColor: "rgba(75,75,75,0.7)",
                     pointStrokeColor: "#9DB86D",
                     data: viewers,
                     lineTension: 0
@@ -124,7 +123,6 @@ app.controller('controller', function ($http, $interval) {
                     fill: false,
                     borderColor: "rgba(0,0,0,1)",
                     pointBorderColor: "rgba(0,0,0,1)",
-                    pointBackgroundColor: "rgba(30,30,30,1)",
                     data: JSON.parse(JSON.stringify(viewers)),
                     lineTension: 0
                 }
