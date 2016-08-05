@@ -113,7 +113,7 @@ app.controller('controller', function ($http, $interval) {
                     label: "# de Viewers",
                     fillColor: "rgba(172,194,132,0.4)",
                     strokeColor: "#ACC26D",
-                    pointColor: "#fff",
+                    pointColor: "#ffffff",
                     pointStrokeColor: "#9DB86D",
                     data: viewers,
                     lineTension: 0
@@ -121,8 +121,8 @@ app.controller('controller', function ($http, $interval) {
                 {
                     label: "Media",
                     fill: false,
-                    strokeColor: "#000",
-                    pointColor: "#333",
+                    strokeColor: "#000000",
+                    pointColor: "#333333",
                     data: JSON.parse(JSON.stringify(viewers)),
                     lineTension: 0
                 }
