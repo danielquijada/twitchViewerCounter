@@ -74,7 +74,7 @@ app.controller('controller', function ($http, $interval) {
         }
     }
 
-    function paintData(viewers, time) {
+    function paintData(newData, time) {
         var viewers = document.getElementById('viewers').getContext('2d');
         if (!chart) {
             chart = new Chart(viewers, {
@@ -82,7 +82,7 @@ app.controller('controller', function ($http, $interval) {
                 data: parseChartData(),
             });
         } else {
-            addData(chart, [viewers], time);
+            addData(chart, [newData], time);
         }
     }
 
