@@ -74,13 +74,16 @@ app.controller('controller', function($http, $interval) {
         }
     }
 
-    function paintData () {
+    function paintData (viewers) {
         var viewers = document.getElementById('viewers').getContext('2d');
-        chart.destroy();
-        chart = new Chart(viewers, {
-            type: "line",
-            data: parseChartData(),
-        });
+        if (!chart) {
+            chart = new Chart(viewers, {
+                type: "line",
+                data: parseChartData(),
+            });
+        } else {
+            chart.addData(viewers)
+        }
     }
 
     function parseChartData () {
@@ -172,7 +175,7 @@ app.controller('controller', function($http, $interval) {
             }
 
             self.history[self.data.date.getTime()] = self.data.viewers;
-            paintData();
+            paintData(self.data.viewers);
         })
     }
 
