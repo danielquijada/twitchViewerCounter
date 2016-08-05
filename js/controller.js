@@ -2,7 +2,7 @@ var app = angular.module('counter', []);
 
 app.controller('controller', function ($http, $interval) {
     var self = this;
-    var TIMEOUT = 60000;
+    var TIMEOUT = 5000;
     var chart;
 
     self.channelName = 'Ealyn';
@@ -87,7 +87,7 @@ app.controller('controller', function ($http, $interval) {
     }
 
     function addData(chart, newData, label) {
-        chart.data.labels.push(label); // add new label at end
+        chart.data.labels.push(parseDate(new Date(+label))); // add new label at end
         
         chart.data.datasets.forEach(function (dataset, index) {
             dataset.data.push(newData[index]); // add new data at end
