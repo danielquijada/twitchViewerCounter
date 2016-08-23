@@ -4,6 +4,10 @@ app.controller('controller', function ($http, $interval) {
     var self = this;
     var TIMEOUT = 60000;
     var chart;
+    var DEFAULT_TITLE = "Twitch Stats Recorder";
+    var SHORT_TITLE = "TSR";
+
+    self.title = DEFAULT_TITLE;
 
     self.channelName = 'Ealyn';
     self.lastCheckedName = 'Ealyn';
@@ -50,6 +54,7 @@ app.controller('controller', function ($http, $interval) {
     }
 
     function startCalculate() {
+        self.title = self.channelName + " - " + SHORT_TITLE;
         if (self.channelName !== self.lastCheckedName) {
             self.initDefaults();
             self.lastCheckedName = self.channelName;
@@ -62,6 +67,7 @@ app.controller('controller', function ($http, $interval) {
     }
 
     function stopCalculate() {
+        self.title = DEFAULT_TITLE;
         self.calculating = false;
         $interval.cancel(self.timer);
         askDownload();
