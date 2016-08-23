@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="counter" ng-controller="controller as ctrl">
 
 <head>
 
@@ -89,7 +89,7 @@
 
     <section id="application">
       <div class="container">
-          <div ng-app="counter" ng-controller="controller as ctrl">
+          <div>
               <img class="img-responsive col-sm-4" ng-src="{{ctrl.data.images.logo}}" alt="{{ctrl.data.images.logo}}">
               <canvas class="col-sm-8" id="viewers" height="auto"></canvas>
 
