@@ -162,6 +162,9 @@ app.controller('controller', function ($http, $interval) {
         var apiUrl = 'https://api.twitch.tv/kraken/streams/' + self.channelName;
         $http({
             method: 'GET',
+            headers: {
+                'Client-ID': 'tqykyd5fb4r9cx5rqiwo8dflyr9stqa'
+            },
             url: apiUrl
         }).then(function success(response) {
             self.loading = false;
